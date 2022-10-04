@@ -3,7 +3,7 @@ Replication package for evaluation of AMAI submission "On the Benefits of Knowle
 
 ## General information
 The python benchmark script can be used as it comes. Nevertheless, we highly recommend using the provided docker image (https://github.com/users/SundermannC/packages/container/kcfm23/44317965?tag=eval) because it is easier to use and for our results we also used docker.
-Furthermore, in `solvers/` the tools are provided as built binaries and the different run configurations are in `run_configurations/`. We divide those in configurations that include confidential models, those that exclude confidential models, and tests configuration. The tests holds the same configurations as the other two, but only considers one model (i.e. Smarch/toybox_0_7_5), runs that model only once, and the output of the tools gets printed onto stdout.
+Furthermore, in `solvers/` the tools are provided as built binaries and the different run configurations are in `run_configurations/`.
 
 ## How to run
 
@@ -17,14 +17,13 @@ Second, we have to pull the image using docker. Note that it might be necessary 
 docker pull ghcr.io/sundermannc/kcfm23:eval
 ```
 
-Now we are ready to run a container with one or multiple run configurations. For instance, the following example starts a docker container from the image ```rp:nc-latest```, with the name test, allocates a tty for the container process (-it flags), and runs all run configurations that are included in the test directory and its subdirectories.
+Now we are ready to run a container with one or multiple run configurations. For instance, the following example starts docker containers from the image ```kcfm23:eval```, evaluating the compilers of the respective target language.
 ```
 docker run --name bdd -d ghcr.io/sundermannc/kcfm23:eval run_configurations/bdd.yaml
 docker run --name sdd -d ghcr.io/sundermannc/kcfm23:eval run_configurations/sdd.yaml
 docker run --name ddnnf -d ghcr.io/sundermannc/kcfm23:eval run_configurations/ddnnf.yaml
 docker run --name eadt -d ghcr.io/sundermannc/kcfm23:eval run_configurations/eadt.yaml
 ```
-
 
 You can get the result data by copying it from the container onto your system. Therefore, you can use the following command which accesses the test container and copies the results directory into the ```DET_PATH_ON_HOST```. This can simply be the current working directory (i.e. ./).
 ```
